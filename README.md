@@ -23,11 +23,13 @@ Database Models
 - Id (primary key)
 - product (required)
 - product_img 
+- inventory 
 
 > `Purchases`
 - Id (primary key)
 - product_id (ForeignKey required)
 - user_id (ForeignKey required)
+- purchase date/time
 
 # API
   - Stripe `for payment`
