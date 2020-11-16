@@ -2,7 +2,7 @@ import os
 
 from flask import Flask, render_template, redirect, flash, session, url_for, g
 from flask_debugtoolbar import DebugToolbarExtension
-from models import db
+from models import db, connect_db
 from secrets import backup_default
 
 app = Flask(__name__)
@@ -16,3 +16,7 @@ app.config['SECRET_KEY'] = os.environ.get('SECRET_KEY', backup_default)
 toolbar = DebugToolbarExtension(app)
 
 connect_db(app)
+
+@app.route('/')
+def home():
+    return render_template('home.html')
