@@ -24,6 +24,7 @@ def home():
 
 @app.route('/signup', methods=["GET", "POST"])
 def signup():
+    '''Signup/register the user'''
     form = SignUpForm()
     if form.validate_on_submit():
         user = User.signup(username=form.username.data,
@@ -36,3 +37,12 @@ def signup():
         db.session.commit()
         return redirect('/')              
     return render_template('users/signup.html', form=form)
+
+@app.route('/login', methods=["GET", "POST"])
+def login():
+    '''Login the user'''
+    form = LoginForm()
+    if form.validate_on_submit():
+        user = User.authenticate(username=form.username.data, password=form.password.data)
+        return redirect('/')
+    return render_template('users/login.html', form=form)
