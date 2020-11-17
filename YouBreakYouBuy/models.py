@@ -49,7 +49,7 @@ class Purchase(db.Model):
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     product_id = db.Column(db.Integer, db.ForeignKey('products.id'))
     user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
-    date_and_time = db.Column(db.Datetime, default=datetime.utcnow())
+    date_and_time = db.Column(db.DateTime, default=datetime.utcnow())
 
 def connect_db(app):
     '''Connects database with the app'''

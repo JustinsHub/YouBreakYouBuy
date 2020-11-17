@@ -7,8 +7,27 @@
     <title>{% block title %}{% endblock %}</title>
 </head>
 <body>
+    <nav class="navbar navbar-dark bg-dark">
+        <a class="navbar-brand ml-3">YouBreakYouBuy</a>
+            <div>
+                <ul class="navbar-nav d-inline col-6">
+                    <li class="navbar-text ml-2">
+                        <a class="nav-link" href="#">About</a>
+                    </li>
+                    <li class="navbar-text ml-2">
+                        <a class="nav-link" href="#">Login</a>
+                    </li>
+                    <li class="navbar-text ml-2">
+                        <a class="nav-link" href="#">Sign Up</a>
+                    </li>
+                </ul>
+                
+            </div>
+    </nav>
+
 {% block content %}
 {% endblock %}
+
 </body>
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
