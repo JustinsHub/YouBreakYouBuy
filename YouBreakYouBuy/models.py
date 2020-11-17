@@ -6,6 +6,7 @@ db = SQLAlchemy()
 bcrypt = Bcrypt()
 
 class User(db.Model):
+    '''User information for the app.'''
     __tablename__ = "users"
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     username = db.Column(db.String(21), unique=True, nullable=False)
@@ -14,15 +15,36 @@ class User(db.Model):
     last_name = db.Column(db.Text(21), nullable=False)
     email = db.Column(db.String, nullable=False)
 
+    @classmethod
+    def signup(cls, username, password, first_name, last_name, email):
+        '''Sign up method for User. Hashes password'''
+
+        hashed = bcrypt.generate_password_hash(password)
+        hashed_utf8 = hashed.decode('utf-8')
+        return cls(username=username, password=hashed_utf8, first_name=first_name, last_name=last_name, email=email)
+
+    @classmethod
+    def authenticate(cls, username, password):
+        '''Looks for username and password to compare it to the User table information. 
+        If it's a match, User is authenticated, else it won't continue unless it's matched correctly.'''
+
+        user = User.query.filter_by(username=username).first()
+        if user and bcrypt.check_password_hash(user.password, password):
+            return user
+        else:
+            return False
+
 class Product(db.Model):
+    '''The product represented on the app.'''
     __tablename__ = "products"
     id = db.Column(db.Integer, primary_key=True, autoincrement=True) 
     product_name = db.Column(db.Text, unique=True)
-    product_img = db.Column(db.String )
-    price = db.Column(db.Integer )
-    inventory = db.Column(db.Intege )
+    product_img = db.Column(db.String)
+    price = db.Column(db.Integer)
+    inventory = db.Column(db.Integer)
 
 class Purchase(db.Model):
+    '''Users purchases'''
     __tablename__ = "purchases"
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     product_id = db.Column(db.Integer, db.ForeignKey('products.id'))
@@ -30,5 +52,6 @@ class Purchase(db.Model):
     date_and_time = db.Column(db.Datetime, default=datetime.utcnow())
 
 def connect_db(app):
+    '''Connects database with the app'''
     db.app = app
     db.init_app(app)
