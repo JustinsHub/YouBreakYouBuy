@@ -2,7 +2,7 @@ import os
 
 from flask import Flask, render_template, redirect, flash, session, url_for, g
 from flask_debugtoolbar import DebugToolbarExtension
-from models import db, connect_db
+from models import db, connect_db, User, Product, Purchase
 from forms import SignUpForm, LoginForm
 from secrets import backup_default
 
@@ -22,5 +22,17 @@ connect_db(app)
 def home():
     return render_template('home.html')
 
-@app.route('/signup')
-def signup()
+@app.route('/signup', methods=["GET", "POST"])
+def signup():
+    form = SignUpForm()
+    if form.validate_on_submit():
+        user = User.signup(username=form.username.data,
+                        password=form.password.data,
+                        first_name=form.first_name.data,
+                        last_name=form.last_name.data,
+                        email=form.email.data,
+                        )
+        db.session.add(user)
+        db.session.commit()
+        return redirect('/')              
+    return render_template('users/signup.html', form=form)
