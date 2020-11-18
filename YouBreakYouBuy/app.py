@@ -4,6 +4,7 @@ from flask import Flask, render_template, redirect, flash, session, url_for, g
 from flask_debugtoolbar import DebugToolbarExtension
 from models import db, connect_db, User, Product, Purchase
 from forms import SignUpForm, LoginForm
+from functions import user_login, user_logout
 from secrets import backup_default
 
 app = Flask(__name__)
@@ -18,6 +19,7 @@ toolbar = DebugToolbarExtension(app)
 
 connect_db(app)
 
+##### For User session #####
 CURRENT_USER = "user_id"
 
 @app.before_request
@@ -30,17 +32,6 @@ def add_user_to_g():
 
     else:
         g.user = None
-
-def do_login(user):
-    """Log in user."""
-
-    session[CURRENT_USER] = user.id
-
-def do_logout():
-    """Logout user."""
-
-    if CURRENT_USER in session:
-        del session[CURRENT_USER]
 
 ##### Home route #####
 
