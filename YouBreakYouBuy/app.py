@@ -1,8 +1,7 @@
 import os
 
-from flask import Flask, render_template, redirect, flash, session, url_for, g
+from flask import Flask, render_template, redirect, session, flash, url_for, g
 from flask_debugtoolbar import DebugToolbarExtension
-from flask_login import LoginManager, login_required
 from models import db, connect_db, User, Product, Purchase
 from forms import SignUpForm, LoginForm
 from functions import user_login, user_logout, CURRENT_USER
@@ -18,14 +17,6 @@ app.config['SECRET_KEY'] = os.environ.get('SECRET_KEY', backup_default)
 toolbar = DebugToolbarExtension(app)
 
 connect_db(app)
-
-##### Login/Authorization helper #####
-login_manager = LoginManager()
-login_manager.init_app(app)
-
-@login_manager.user_loader
-def load_user(user_id):
-    return User.get(user_id)
 
 ##### For User session #####
 
@@ -76,7 +67,8 @@ def login():
                                 password=form.password.data)
         if user:                       
             user_login(user)
-            return redirect('/')
+            flash('Successfully logged in!', 'success')
+            return redirect('/users')
         flash('Invalid Username/Password', 'danger')
     return render_template('users/login.html', form=form)
 
@@ -89,8 +81,11 @@ def logout():
 
 ##### User Information #####
 @app.route('/users')
-@login_required
 def user_page():
-    '''Users information page'''
-    user = g.user
-    return render_template('users/users-page.html', user=user)
+    '''Users information page. Must login to access.'''
+    if g.user:
+        user = g.user
+        return render_template('users/users-page.html', user=user)
+    else:
+        flash('Unauthorized. Must login to have access.', 'danger')
+        return redirect(url_for('login'))
