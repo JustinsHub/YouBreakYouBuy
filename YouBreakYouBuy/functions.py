@@ -1,3 +1,7 @@
+from flask import session
+
+CURRENT_USER = "user_id"
+
 def user_login(user):   
     """Log in user."""
 

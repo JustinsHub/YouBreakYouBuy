@@ -14,10 +14,13 @@
         <a class="navbar-brand ml-3" href="/">YouBreakYouBuy</a>
             <div>
                 <ul class="navbar-nav d-inline col-6">
-                    <li class="navbar-text ml-2">
+                    <li class="navbar-text mr-2">
                         <a class="nav-link" href="#">About</a>
                     </li>
                     {% if g.user %}
+                    <li class="navbar-text">
+                        <p>Hello {{g.user.username}}!</p>
+                    </li>
                     <li class="navbar-text ml-2">
                         <a class="nav-link" href="{{url_for('logout')}}">Logout</a>
                     </li>
@@ -33,14 +36,21 @@
             </div>
     </nav>
     </header>
+    
+    {% for category, message in get_flashed_messages(with_categories=True) %}
+    <div class="alert alert-{{ category }} d-flex justify-content-center mt-2">{{ message }}</div>
+    {% endfor %}
+
+    {% block content %}
+    {% endblock %}
+
     <footer id="footer" class="mastfoot mt-auto">
         <div class="inner">
         <p>&copy;Copyright 2020 <a href="/">YouBreakYouBuy</a>. All Rights Reserved.</p>
         </div>
     </footer>
 </div>
-{% block content %}
-{% endblock %}
+
 
 </body>
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>

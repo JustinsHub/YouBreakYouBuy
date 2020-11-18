@@ -4,7 +4,7 @@ from flask import Flask, render_template, redirect, flash, session, url_for, g
 from flask_debugtoolbar import DebugToolbarExtension
 from models import db, connect_db, User, Product, Purchase
 from forms import SignUpForm, LoginForm
-from functions import user_login, user_logout
+from functions import user_login, user_logout, CURRENT_USER
 from secrets import backup_default
 
 app = Flask(__name__)
@@ -13,14 +13,13 @@ app.config['SQLALCHEMY_DATABASE_URI'] = (
 
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.config['SQLALCHEMY_ECHO'] = False
-app.config['DEBUG_TB_INTERCEPT_REDIRECTS'] = True
+app.config['DEBUG_TB_INTERCEPT_REDIRECTS'] = False
 app.config['SECRET_KEY'] = os.environ.get('SECRET_KEY', backup_default)
 toolbar = DebugToolbarExtension(app)
 
 connect_db(app)
 
 ##### For User session #####
-CURRENT_USER = "user_id"
 
 @app.before_request
 def add_user_to_g():
@@ -55,7 +54,7 @@ def signup():
                             )
         db.session.add(user)
         db.session.commit()
-        do_login(user)
+        user_login(user)
         return redirect('/')              
     return render_template('users/signup.html', form=form)
 
@@ -67,12 +66,16 @@ def login():
     if form.validate_on_submit():
         user = User.authenticate(username=form.username.data, 
                                 password=form.password.data)
-        do_login(user)
-        return redirect('/')
+        if user:                       
+            user_login(user)
+            return redirect('/')
+        flash('Invalid Username/password', 'danger')
     return render_template('users/login.html', form=form)
 
 @app.route('/logout')
 def logout():
     '''Handle the logout for user.'''
-    do_logout()
+    user_logout()
+    flash('Successfully logged out.', 'success')
     return redirect('/')
+
