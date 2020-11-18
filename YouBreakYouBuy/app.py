@@ -2,6 +2,7 @@ import os
 
 from flask import Flask, render_template, redirect, flash, session, url_for, g
 from flask_debugtoolbar import DebugToolbarExtension
+from flask_login import LoginManager, login_required
 from models import db, connect_db, User, Product, Purchase
 from forms import SignUpForm, LoginForm
 from functions import user_login, user_logout, CURRENT_USER
@@ -10,7 +11,6 @@ from secrets import backup_default
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = (
     os.environ.get('DATABASE_URL', 'postgres:///YouBreakYouBuy'))
-
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.config['SQLALCHEMY_ECHO'] = False
 app.config['DEBUG_TB_INTERCEPT_REDIRECTS'] = False
@@ -18,6 +18,14 @@ app.config['SECRET_KEY'] = os.environ.get('SECRET_KEY', backup_default)
 toolbar = DebugToolbarExtension(app)
 
 connect_db(app)
+
+##### Login/Authorization helper #####
+login_manager = LoginManager()
+login_manager.init_app(app)
+
+@login_manager.user_loader
+def load_user(user_id):
+    return User.get(user_id)
 
 ##### For User session #####
 
@@ -69,7 +77,7 @@ def login():
         if user:                       
             user_login(user)
             return redirect('/')
-        flash('Invalid Username/password', 'danger')
+        flash('Invalid Username/Password', 'danger')
     return render_template('users/login.html', form=form)
 
 @app.route('/logout')
@@ -79,3 +87,10 @@ def logout():
     flash('Successfully logged out.', 'success')
     return redirect('/')
 
+##### User Information #####
+@app.route('/users')
+@login_required
+def user_page():
+    '''Users information page'''
+    user = g.user
+    return render_template('users/users-page.html', user=user)
