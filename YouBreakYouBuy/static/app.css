@@ -12,18 +12,26 @@
 	text-indent: 50px;
 }
 
-#login-card {
+.border-card {
 	border-color: rgba(231, 109, 109, 0.9);
 }
-#login-here {
+
+.login-here {
 	color: rgba(221, 96, 96, 0.9);
 	font-weight: bold;
 }
+
 #login-brand-font {
 	font-size: 33px;
 }
-#no-account {
+
+.no-account {
 	font-size: 14px;
+}
+
+#signup-rules {
+	font-size: 13px;
+	color: rgba(0, 0, 0, 0.4);
 }
 
 .btns {

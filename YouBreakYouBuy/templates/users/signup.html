@@ -2,21 +2,39 @@
 {% block title %}Sign Up{% endblock %}
 
 {% block content %}
-<div class="container-fluid">
+<div class="text-center mt-5">
+<div class="container card border-card" style="width: 20rem;">
+    <div class="card-body"></div>
     <h1>Sign Up</h1>
+    <p id="signup-rules">In order to make purchases, you must have an account.</p>
     <form class="form-group" method="POST">
-    {{form.hidden_tag()}}
-    {% for field in form if field.widget.input_type != 'hidden' %}
+        {{form.hidden_tag()}}
+    <p class="sign-up-input">
+        {{form.username(class="form-control", placeholder="Username")}}
+    </p>
     <p>
-    {{field.label}}
-    {{field}}
+        {{form.password(class="form-control", placeholder="Password")}}
+    </p>
+    <p>
+        {{form.first_name(class="form-control", placeholder="First Name")}}
+    </p>
+    <p>
+        {{form.last_name(class="form-control", placeholder="Last Name")}}
+    </p>
+    <p>
+        {{form.email(class="form-control", placeholder="Email")}}
+    </p>
 
+    <p>
+    {% for field in form if field.widget.input_type != 'hidden' %}
     {% for error in field.errors %}
         {{ error }}
     {% endfor %}
     {% endfor %}
     </p>
+    <p class="no-account">Already have an account?<a class="login-here" href="{{url_for('login')}}"> Login</a></p>
     <button class="btn btns" type="submit">Sign Up!</button>
     </form>
+</div>
 </div>
 {% endblock %}
