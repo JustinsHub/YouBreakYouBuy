@@ -7,3 +7,31 @@
 	text-align: center;
 	font-size: 13px;
 }
+
+#about-us {
+	text-indent: 50px;
+}
+
+#login-card {
+	border-color: rgba(231, 109, 109, 0.9);
+}
+#login-here {
+	color: rgba(221, 96, 96, 0.9);
+	font-weight: bold;
+}
+#login-brand-font {
+	font-size: 33px;
+}
+#no-account {
+	font-size: 14px;
+}
+
+.btns {
+	background-color: rgba(231, 96, 96, 0.9);
+	color: white;
+	font-weight: bold;
+}
+
+.brand-font {
+	font-family: 'Courier New', Courier, monospace;
+}

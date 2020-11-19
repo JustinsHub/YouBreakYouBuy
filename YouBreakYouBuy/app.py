@@ -18,7 +18,7 @@ toolbar = DebugToolbarExtension(app)
 
 connect_db(app)
 
-##### For User session #####
+#####***** For User session *****#####
 
 @app.before_request
 def add_user_to_g():
@@ -31,14 +31,14 @@ def add_user_to_g():
     else:
         g.user = None
 
-##### Home route #####
+#####***** Home route *****#####
 
 @app.route('/')
 def home():
     return render_template('home.html')
 
 
-##### User sign up/login form #####
+#####***** User sign up/login form *****#####
 
 @app.route('/signup', methods=["GET", "POST"])
 def signup():
@@ -68,7 +68,7 @@ def login():
         if user:                       
             user_login(user)
             flash('Successfully logged in!', 'success')
-            return redirect('/users')
+            return redirect('/profile')
         flash('Invalid Username/Password', 'danger')
     return render_template('users/login.html', form=form)
 
@@ -79,7 +79,7 @@ def logout():
     flash('Successfully logged out.', 'success')
     return redirect('/')
 
-##### User Information #####
+#####***** User Information *****#####
 
 @app.route('/profile')
 def user_page():
@@ -93,17 +93,27 @@ def user_page():
 
 @app.route('/profile/<int:id>/edit', methods=["GET","POST"])
 def edit_user(id):
-    '''Edit user profile with authentication.'''
+    '''Edit user profile with authentication/authorization.'''
     user = User.query.get_or_404(id)
     form = SignUpForm()
-    if form.validate_on_submit():
-        if User.authenticate(form.username.data, form.password.data):
-            user.username = form.username.data
-            user.first_name = form.first_name.data
-            user.last_name = form.last_name.data
-            user.email = form.email.data
-            db.session.commit()
-            return redirect(url_for('user_page')) 
-        else:
-            form.password.errors = ['Incorrect password.']
+    if g.user:
+        if form.validate_on_submit():
+            if User.authenticate(form.username.data, form.password.data):
+                user.username = form.username.data
+                user.first_name = form.first_name.data
+                user.last_name = form.last_name.data
+                user.email = form.email.data
+                db.session.commit()
+                return redirect(url_for('user_page')) 
+            else:
+                form.password.errors = ['Incorrect password.']
+    else:
+        flash('Unauthorized. Must login to have access.', 'danger')
+        return redirect(url_for('login'))
     return render_template('users/edit-user.html', user=user, form=form)
+
+#####***** Website Information *****#####
+
+@app.route('/about')
+def about_page():
+    return render_template('/about-page.html')

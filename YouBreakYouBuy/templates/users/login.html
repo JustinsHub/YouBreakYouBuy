@@ -1,22 +1,35 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<div class="container-fluid">
-    <h1>Sign Up</h1>
-    <form class="form-group" method="POST">
+{% if not g.user %}
+<main class="text-center mt-5">
+<div id="login-card" class="container card" style="width: 24rem;">
+    <div class="card-body">
+    <p id="login-brand-font" class="brand-font mt-3">YouBreakYouBuy</p>
+    <form class="form-signin mt-5" method="POST">
     {{form.hidden_tag()}}
-    {% for field in form if field.widget.input_type != 'hidden' %}
     <p>
-    {{field.label}}
-    {{field}}
+    {{form.username(class="form-control-lg", placeholder="Username")}}
+    </p>
+    <p>
+    {{form.password(class="form-control-lg", placeholder="Password")}}
+    </p>
 
+    {% for field in form if field.widget.input_type != 'hidden' %}
     {% for error in field.errors %}
         {{ error }}
     {% endfor %}
     {% endfor %}
     </p>
-    <button class="btn btn-primary" type="submit">Login</button>
+    <p id="no-account">Don't have an account?<a id="login-here" href="{{url_for('signup')}}"> Sign up</a></p>
+    <button class="btn btns" type="submit">Login</button>
     </form>
+    </div> 
 </div>
-
+{% else %}
+<div class="container d-flex justify-content-center mt-3">
+    <h2>You thought you were gonna have it your way?</h2>
+</div>
+{% endif %}
+</main>
 {% endblock %}

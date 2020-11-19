@@ -8,30 +8,32 @@
     <form class="form-group" method="POST">
     {{form.hidden_tag()}}
     <div>
-    <p>
-    {{form.username.label}} {{form.username}}
-    </p>
-    <p>
-    {{form.first_name.label}} {{form.first_name}}
-    </p>
-    <p>
-    {{form.last_name.label}} {{form.last_name}}
-    </p>
-    <p>
-    {{form.email.label}} {{form.email}}
-    </p>
-    </div>
-    <div>
-        <p>Please enter your password for verification.</p>
-        <p>{{form.password.label}}{{form.password}}
-        {% for field in form if field.widget.input_type != 'hidden' %}
-        {% for error in field.errors %}
-        {{ error }}
-        {% endfor %}
-        {% endfor %}
+        <p>
+            {{form.username.label}} {{form.username}}
         </p>
+        <p>
+            {{form.first_name.label}} {{form.first_name}}
+        </p>
+        <p>
+            {{form.last_name.label}} {{form.last_name}}
+        </p>
+        <p>
+            {{form.email.label}} {{form.email}}
+        </p>
+        </div>
+    <div>
+        <p>
+            Please enter your password for verification.
+        </p>
+        <p>
+            {{form.password.label}}{{form.password}}
+        </p>
+            {% for field in form if field.widget.input_type != 'hidden' %}
+            {% for error in field.errors %}
+                <span class="alert alert-danger">{{ error }}</span>
+            {% endfor %}
+            {% endfor %}
     </div>
-
     </p>
     <button class="btn btn-primary" type="submit">Update</button>
     </form>
