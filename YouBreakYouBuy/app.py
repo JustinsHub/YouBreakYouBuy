@@ -80,7 +80,8 @@ def logout():
     return redirect('/')
 
 ##### User Information #####
-@app.route('/users')
+
+@app.route('/profile')
 def user_page():
     '''Users information page. Must login to access.'''
     if g.user:
@@ -89,3 +90,20 @@ def user_page():
     else:
         flash('Unauthorized. Must login to have access.', 'danger')
         return redirect(url_for('login'))
+
+@app.route('/profile/<int:id>/edit', methods=["GET","POST"])
+def edit_user(id):
+    '''Edit user profile with authentication.'''
+    user = User.query.get_or_404(id)
+    form = SignUpForm()
+    if form.validate_on_submit():
+        if User.authenticate(form.username.data, form.password.data):
+            user.username = form.username.data
+            user.first_name = form.first_name.data
+            user.last_name = form.last_name.data
+            user.email = form.email.data
+            db.session.commit()
+            return redirect(url_for('user_page')) 
+        else:
+            form.password.errors = ['Incorrect password.']
+    return render_template('users/edit-user.html', user=user, form=form)
