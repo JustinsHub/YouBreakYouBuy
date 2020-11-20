@@ -67,7 +67,7 @@ def login():
                                 password=form.password.data)
         if user:                       
             user_login(user)
-            flash('Successfully logged in!', 'success')
+            flash(f'You are now logged in as {user.username}!', 'success')
             return redirect('/profile')
         flash('Invalid Username/Password', 'danger')
     return render_template('users/login.html', form=form)
@@ -117,3 +117,8 @@ def edit_user(id):
 @app.route('/about')
 def about_page():
     return render_template('/about-page.html')
+
+@app.route('/products')
+def product_page():
+    product = Product.query.all()
+    return render_template('products.html', products=product)

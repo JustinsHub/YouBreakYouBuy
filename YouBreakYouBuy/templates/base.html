@@ -17,16 +17,25 @@
                     <li class="navbar-text mr-2">
                         <a class="nav-link" href="{{url_for('about_page')}}">About</a>
                     </li>
-                    {% if g.user %}
                     <li class="navbar-text">
-                        <p>Hello, (<a href="{{url_for('user_page')}}">{{g.user.first_name}}</a>)!</p>
+                        <a class="nav-link" href="{{url_for('product_page')}}">Products</a>
                     </li>
+                    {% if g.user %}
+                    <li class="navbar-text ml-2">
+                        <p>Hello, <a href="{{url_for('user_page')}}">{{g.user.first_name}}</a>!</p>
+                    </li>
+                    <li class="navbar-text ml-2">
+                        |
+                        </li>
                     <li class="navbar-text ml-2">
                         <a class="nav-link" href="{{url_for('logout')}}">Sign Out</a>
                     </li>
                     {% else %}
                     <li class="navbar-text ml-2">
                         <a class="nav-link" href="{{url_for('login')}}">Login</a>
+                    </li>
+                    <li class="navbar-text ml-2">
+                    |
                     </li>
                     <li class="navbar-text ml-2">
                         <a class="nav-link" href="{{url_for('signup')}}">Sign Up</a>
