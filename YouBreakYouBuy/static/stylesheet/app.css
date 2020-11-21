@@ -1,11 +1,19 @@
 #footer {
-	position: fixed;
+	position: absolute;
 	left: 0;
 	bottom: 0;
 	width: 100%;
 	color: rgba(0, 0, 0, 0.4);
 	text-align: center;
 	font-size: 13px;
+}
+#page-container {
+	position: relative;
+	min-height: 100vh;
+}
+
+#content-wrap {
+	padding-bottom: 2.5rem;
 }
 
 #about-us {
@@ -42,4 +50,9 @@
 
 .brand-font {
 	font-family: 'Courier New', Courier, monospace;
+}
+
+.product-img-size {
+	width: 100%;
+	height: 100%;
 }

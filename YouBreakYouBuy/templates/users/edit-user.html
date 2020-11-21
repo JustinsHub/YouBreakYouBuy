@@ -3,39 +3,47 @@
 {% block title %}Edit Profile{% endblock %}
 
 {% block content %}
-<div class="container-fluid">
-    <h1>Edit Profile</h1>
+<main class="text-center mt-5">
+<div class="container card border-card" style="width: 21.9rem; height: 20rem;">
+<div class="card-body">
+    <h1>Update Your Profile</h1>
     <form class="form-group" method="POST">
     {{form.hidden_tag()}}
     <div>
         <p>
-            {{form.username.label}} {{form.username}}
+            {{form.username(placeholder="Username")}}
         </p>
         <p>
-            {{form.first_name.label}} {{form.first_name}}
+            {{form.first_name(placeholder="First Name")}}
         </p>
         <p>
-            {{form.last_name.label}} {{form.last_name}}
+            {{form.last_name(placeholder="Last Name")}}
         </p>
         <p>
-            {{form.email.label}} {{form.email}}
+            {{form.email(placeholder="Email")}}
         </p>
+    </div>
+</div>
+</div>
+    <div class="container card border-card mt-2" style="width: 21.9rem; height: 12rem;">
+        <div class="card-body">
+        <p class="mt-1">
+            Please enter your password below for verification.
+        </p>
+        <p>
+            {{form.password}}
+        </p>
+        {% for field in form if field.widget.input_type != 'hidden' %}
+        {% for error in field.errors %}
+            <span class="alert alert-danger">{{ error }}</span>
+        {% endfor %}
+        {% endfor %}
         </div>
-    <div>
-        <p>
-            Please enter your password for verification.
-        </p>
-        <p>
-            {{form.password.label}}{{form.password}}
-        </p>
-            {% for field in form if field.widget.input_type != 'hidden' %}
-            {% for error in field.errors %}
-                <span class="alert alert-danger">{{ error }}</span>
-            {% endfor %}
-            {% endfor %}
+        <button class="btn btns mb-3" type="submit">Update</button>
     </div>
     </p>
-    <button class="btn btn-primary" type="submit">Update</button>
+    
     </form>
-</div>
+
+</main>
 {% endblock %}

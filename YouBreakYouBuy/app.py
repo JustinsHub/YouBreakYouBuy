@@ -95,7 +95,7 @@ def user_page():
 def edit_user(id):
     '''Edit user profile with authentication/authorization.'''
     user = User.query.get_or_404(id)
-    form = SignUpForm()
+    form = SignUpForm(obj=user)
     if g.user:
         if form.validate_on_submit():
             if User.authenticate(form.username.data, form.password.data):
