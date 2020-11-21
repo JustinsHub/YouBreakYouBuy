@@ -3,5 +3,26 @@
 {% block title %}Home{% endblock %}
 
 {% block content %}
-
+<section id="about" class="container">
+    <div class="jumbotron mt-5">
+    <div class="d-flex justify-content-center mt-2">
+        <h1>About Us</h1>
+    </div>
+    <div id="about-us" class="container mt-2">   
+        <p> Established in 2020, during the Coronavirus pandemic was the best time to have YouBreakYouBuy to be launched.
+            Here in YouBreakYouBuy, we specialize in taking care of our products straight to the clients. Our mission is to give the best 
+            quality to our clients that will let never be forgotten in history and considered a memorable moment and that will change lives. 
+            If the client breaks the product in any way, you must buy. Even just looking at the product, you must buy. Just visiting this website, 
+            you must buy. Buying is the only choice to have during this pandemic and the rest will take care of itself. Just like toilet paper.
+        </p>
+    </div>
+    </div>
+</section>
+<section id="product">
+    <div class="text-center">
+        {% for product in products %}
+        <img class="product-img-size" src="{{product.product_img}}">
+        {% endfor %}
+    </div>
+</section>
 {% endblock %}

@@ -35,7 +35,8 @@ def add_user_to_g():
 
 @app.route('/')
 def home():
-    return render_template('home.html')
+    product = Product.query.all()
+    return render_template('home.html', products=product)
 
 
 #####***** User sign up/login form *****#####
@@ -111,14 +112,3 @@ def edit_user(id):
         flash('Unauthorized. Must login to have access.', 'danger')
         return redirect(url_for('login'))
     return render_template('users/edit-user.html', user=user, form=form)
-
-#####***** Website Information *****#####
-
-@app.route('/about')
-def about_page():
-    return render_template('/about-page.html')
-
-@app.route('/products')
-def product_page():
-    product = Product.query.all()
-    return render_template('products.html', products=product)
