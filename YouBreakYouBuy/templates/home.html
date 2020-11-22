@@ -1,28 +1,103 @@
 {% extends 'base.html' %}
 
 {% block title %}Home{% endblock %}
-
+{% block nav %}
+<ul class="navbar-text d-inline col-6">
+    <li class="navbar-text mr-1">
+        <a class="nav-link" href="#about">About</a>
+    </li>
+    <li class="navbar-text">
+        <a class="nav-link" href="#product">Products</a>
+    </li>
+    {% if g.user %}
+    <li class="navbar-text ml-1">
+        <p>Hello, <a href="{{url_for('user_page')}}">{{g.user.first_name}}</a>!</p>
+    </li>
+    <li class="navbar-text ml-1">
+        |
+        </li>
+    <li class="navbar-text ml-1">
+        <a class="nav-link" href="{{url_for('logout')}}">Sign Out</a>
+    </li>
+    {% else %}
+    <li class="navbar-text ml-2">
+        <a class="nav-link" href="{{url_for('login')}}">Login</a>
+    </li>
+    <li class="navbar-text ml-1">
+    |
+    </li>
+    <li class="navbar-text ml-1">
+        <a class="nav-link" href="{{url_for('signup')}}">Sign Up</a>
+    </li>
+    {% endif %}
+</ul>
+{% endblock %}
 {% block content %}
+<main>
 <section id="about" class="container">
-    <div class="jumbotron mt-5">
-    <div class="d-flex justify-content-center mt-2">
-        <h1>About Us</h1>
-    </div>
-    <div id="about-us" class="container mt-2">   
-        <p> Established in 2020, during the Coronavirus pandemic was the best time to have YouBreakYouBuy to be launched.
+    <div class="row col-12 mt-5">
+        <div class="col-1"></div>
+        <div class="col-md-4">
+            <h1 class="text-center description">About Us</h1>
+            <p class="description">Established in 2020, during the Coronavirus pandemic was the best time to have YouBreakYouBuy to be launched.
             Here in YouBreakYouBuy, we specialize in taking care of our products straight to the clients. Our mission is to give the best 
-            quality to our clients that will let never be forgotten in history and considered a memorable moment and that will change lives. 
-            If the client breaks the product in any way, you must buy. Even just looking at the product, you must buy. Just visiting this website, 
-            you must buy. Buying is the only choice to have during this pandemic and the rest will take care of itself. Just like toilet paper.
-        </p>
+            quality to our clients that will never be forgotten in history and considered a memorable moment that will change lives. 
+            Buying is the only choice to have during this pandemic and the rest will take care of itself. Just like toilet paper.
+            </p>
+        </div>
+        <div class="col-1"></div>
+        <div class="col-md-6">
+            <img class="photo-img" src="static/images/about-us-pic.jpeg">
+        </div>
     </div>
+
+    <div class="row col-12 mt-5">
+        <div class="text-center col-md-7">
+            <img class="photo-img2 mt-5" src="static/images/about-us-pic-two.jpeg">
+        </div>
+        <div class="col-md-4">
+            <h2 class="text-center mt-5 description">Finding the problem and fix it quickly.</h2>
+            <p class="description">The perfect product has arrived. This innovative design worked tirelessly by our engineers finding all the problems that we can fix, 
+                makes a all around change in the world. Backed by Someone, realized that this product can help reduce the pandemic situation.
+                <p class="no-account"><cite><b>"This product has the potential to stop multiple world problems, especially the pandemic happening now." - Someone </b> </cite></p>
+            </p>
+        </div>
     </div>
 </section>
-<section id="product">
-    <div class="text-center">
-        {% for product in products %}
-        <img class="product-img-size" src="{{product.product_img}}">
-        {% endfor %}
+</main>
+<br>
+<br>
+{% endblock %}
+
+
+{% block product %}
+<section id="product" class="container mt-5">
+    <div class="row"> 
+
+            <div class="col-md-2 mt-5">
+                <p class="mt-5"><cite>Number one leading brand! <b>-Forbes</b></cite></p>
+                <br>
+                <p><cite>The most innovative idea that is going to change the world by far! <b>-Global News</b></cite></p>
+                <br>
+                <p><cite>No matching product can be done! <b>-Rolly Polly Olly</b></cite></p>
+            </div>
+
+
+            <div class="text-center col-md-8">
+            <h1>Our Product</h1>
+            {% for product in products %}
+            <img class="product-img-size" src="{{product.product_img}}">
+            {% endfor %}
+            </div>
+
+            <div class="col-md-2 mt-5">
+                <p class="mt-5"><cite>The next upcoming product that everyone will have in their household. <br><b>-Some CEO</b></cite></p>
+                <br>
+                <p><cite>Pure genius! <br><b>-I Don't Know</b></cite></p>
+                <br>
+                <p><cite>This helped me become president of the United States! <br><b>-Joe Biden</b></cite></p>
+            </div>
     </div>
 </section>
+
 {% endblock %}

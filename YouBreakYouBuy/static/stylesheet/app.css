@@ -2,6 +2,13 @@ html {
 	scroll-behavior: smooth;
 }
 
+.section-color {
+	background-color: rgba(240, 101, 36, 0.849);
+}
+
+.navbar {
+	background-color: rgba(240, 101, 36, 0.849);
+}
 #footer {
 	position: absolute;
 	left: 0;
@@ -20,10 +27,9 @@ html {
 	padding-bottom: 2.5rem;
 }
 
-#about-us {
+.indent {
 	text-indent: 50px;
 }
-
 .border-card {
 	border-color: rgba(231, 109, 109, 0.9);
 }
@@ -54,11 +60,28 @@ html {
 
 .brand-font {
 	font-family: 'Courier New', Courier, monospace;
+	border: black;
 }
 
 .product-img-size {
-	width: 50%;
-	height: 50%;
+	height: 90%;
+	width: 90%;
+}
+
+.description {
+	color: rgba(255, 255, 255, 0.925);
+}
+.photo-img {
+	object-fit: cover;
+	width: 80%;
+	height: 110%;
+	border-radius: 50%;
+}
+.photo-img2 {
+	object-fit: cover;
+	width: 70%;
+	height: 90%;
+	border-radius: 50%;
 }
 
 .letter {

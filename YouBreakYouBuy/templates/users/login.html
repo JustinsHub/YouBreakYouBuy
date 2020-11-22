@@ -1,5 +1,31 @@
 {% extends 'base.html' %}
 
+{% block nav %}
+{% if g.user %}
+            <ul class="navbar-nav d-inline col-6">
+                    <li class="navbar-text ml-2">
+                        <p>Hello, <a href="{{url_for('user_page')}}">{{g.user.first_name}}</a>!</p>
+                    </li>
+                    <li class="navbar-text">
+                        |
+                        </li>
+                    <li class="navbar-text">
+                        <a class="nav-link" href="{{url_for('logout')}}">Sign Out</a>
+                    </li>
+                    {% else %}
+                    <li class="navbar-text">
+                        <a class="nav-link" href="{{url_for('login')}}">Login</a>
+                    </li>
+                    <li class="navbar-text">
+                    |
+                    </li>
+                    <li class="navbar-text">
+                        <a class="nav-link" href="{{url_for('signup')}}">Sign Up</a>
+                    </li>
+                    {% endif %}
+                </ul>
+{% endblock %}
+
 {% block content %}
 {% if not g.user %}
 <main class="text-center mt-5">

@@ -1,6 +1,32 @@
 {% extends 'base.html' %}
 {% block title %}Sign Up{% endblock %}
 
+{% block nav %}
+{% if g.user %}
+    <ul class="navbar-nav d-inline col-6">
+            <li class="navbar-text ml-2">
+                <p>Hello, <a href="{{url_for('user_page')}}">{{g.user.first_name}}</a>!</p>
+            </li>
+                <li class="navbar-text">
+                |
+                </li>
+            <li class="navbar-text">
+                <a class="nav-link" href="{{url_for('logout')}}">Sign Out</a>
+            </li>
+            {% else %}
+            <li class="navbar-text">
+            <a class="nav-link" href="{{url_for('login')}}">Login</a>
+            </li>
+                <li class="navbar-text">
+                |
+                </li>
+                <li class="navbar-text">
+                <a class="nav-link" href="{{url_for('signup')}}">Sign Up</a>
+                </li>
+            {% endif %}
+    </ul>
+{% endblock %}
+
 {% block content %}
 <div class="text-center mt-5">
 <div class="container card border-card" style="width: 21.9rem;">

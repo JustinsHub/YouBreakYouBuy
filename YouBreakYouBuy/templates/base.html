@@ -10,38 +10,11 @@
 <body>
 <div id="page-container">
 <div id="content-wrap">
-    <nav class="navbar navbar-dark bg-dark">
+    <section class="section-color">
+    <nav class="navbar navbar-dark">
         <a class="navbar-brand ml-3 brand-font" href="/">YouBreakYouBuy</a>
             <div>
-                <ul class="navbar-nav d-inline col-6">
-                    <li class="navbar-text mr-2">
-                        <a class="nav-link" href="#about">About</a>
-                    </li>
-                    <li class="navbar-text">
-                        <a class="nav-link" href="#product">Products</a>
-                    </li>
-                    {% if g.user %}
-                    <li class="navbar-text ml-2">
-                        <p>Hello, <a href="{{url_for('user_page')}}">{{g.user.first_name}}</a>!</p>
-                    </li>
-                    <li class="navbar-text ml-2">
-                        |
-                        </li>
-                    <li class="navbar-text ml-2">
-                        <a class="nav-link" href="{{url_for('logout')}}">Sign Out</a>
-                    </li>
-                    {% else %}
-                    <li class="navbar-text ml-2">
-                        <a class="nav-link" href="{{url_for('login')}}">Login</a>
-                    </li>
-                    <li class="navbar-text ml-2">
-                    |
-                    </li>
-                    <li class="navbar-text ml-2">
-                        <a class="nav-link" href="{{url_for('signup')}}">Sign Up</a>
-                    </li>
-                    {% endif %}
-                </ul>
+                {% block nav %}{% endblock %}
             </div>
     </nav>
     {% for category, message in get_flashed_messages(with_categories=True) %}
@@ -50,11 +23,16 @@
 
     {% block content %}
     {% endblock %}
+</section>
+{% block product %}
+{% endblock %}
 </div>
 
+
+<br>
 <footer id="footer" class="mastfoot mt-auto">
     <div class="inner">
-    <p>&copy;Copyright 2020 <a href="/">YouBreakYouBuy</a>. All Rights Reserved.</p>
+    <p>&copy;Copyright 2020 <a class="login-here" href="/">YouBreakYouBuy</a>. All Rights Reserved.</p>
     </div>
 </footer>
 </div>

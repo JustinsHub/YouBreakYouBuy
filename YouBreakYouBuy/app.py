@@ -112,3 +112,7 @@ def edit_user(id):
         flash('Unauthorized. Must login to have access.', 'danger')
         return redirect(url_for('login'))
     return render_template('users/edit-user.html', user=user, form=form)
+
+@app.route('/cart')
+def cart():
+    return render_template('cart.html')
