@@ -6,6 +6,10 @@ html {
 	background-color: rgba(240, 101, 36, 0.849);
 }
 
+hr {
+	width: 20%;
+}
+
 .navbar {
 	background-color: rgba(240, 101, 36, 0.849);
 }
@@ -35,7 +39,7 @@ html {
 }
 
 .login-here {
-	color: rgba(221, 96, 96, 0.9);
+	color: rgba(240, 101, 36, 0.849);
 	font-weight: bold;
 }
 
@@ -53,7 +57,7 @@ html {
 }
 
 .btns {
-	background-color: rgba(231, 96, 96, 0.9);
+	background-color: rgba(240, 101, 36, 0.849);
 	color: white;
 	font-weight: bold;
 }
@@ -64,8 +68,10 @@ html {
 }
 
 .product-img-size {
-	height: 90%;
+	height: 80%;
 	width: 90%;
+	border-radius: 20px;
+	box-shadow: 1px 1px 10px rgba(0, 0, 0, 0.479);
 }
 
 .description {

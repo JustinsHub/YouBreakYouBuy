@@ -1,5 +1,5 @@
 from flask_wtf import FlaskForm
-from wtforms import StringField, PasswordField
+from wtforms import StringField, PasswordField, SubmitField
 from wtforms.validators import InputRequired, Email, Length
 
 class SignUpForm(FlaskForm):
@@ -12,3 +12,7 @@ class SignUpForm(FlaskForm):
 class LoginForm(FlaskForm):
     username = StringField("Username:", validators=[InputRequired()])
     password = PasswordField("Password:", validators=[InputRequired()])
+
+class ProductForm(FlaskForm):
+    product_name = StringField('Product Name')
+    product = SubmitField('Add to Cart')

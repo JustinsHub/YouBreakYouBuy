@@ -79,7 +79,7 @@
                 <br>
                 <p><cite>The most innovative idea that is going to change the world by far! <b>-Global News</b></cite></p>
                 <br>
-                <p><cite>No matching product can be done! <b>-Rolly Polly Olly</b></cite></p>
+                <p><cite>No matching product can be done! <br><b>-Rolly Polly Olly</b></cite></p>
             </div>
 
 
@@ -88,7 +88,24 @@
             {% for product in products %}
             <img class="product-img-size" src="{{product.product_img}}">
             {% endfor %}
+
+        
+        <div>
+            <form class="form-group" method="POST">
+                    {{form.hidden_tag()}}
+                    <p>Infinite Water</p>
+                    <p>
+                    {{form.product(class="btn btns")}}
+                    {% for field in form if field.widget.input_type != 'hidden' %}
+                    {% for error in field.errors %}
+                        {{ error }}
+                    {% endfor %}
+                    {% endfor %}
+                    </p>
+            </form>
             </div>
+        
+        </div>
 
             <div class="col-md-2 mt-5">
                 <p class="mt-5"><cite>The next upcoming product that everyone will have in their household. <br><b>-Some CEO</b></cite></p>

@@ -1,9 +1,9 @@
 import os
 
-from flask import Flask, render_template, redirect, session, flash, url_for, g
+from flask import Flask, render_template, redirect, request, session, flash, url_for, g
 from flask_debugtoolbar import DebugToolbarExtension
-from models import db, connect_db, User, Product, Purchase
-from forms import SignUpForm, LoginForm
+from models import db, connect_db, User, Product, Purchase, Cart
+from forms import SignUpForm, LoginForm, ProductForm
 from functions import user_login, user_logout, CURRENT_USER
 from secrets import backup_default
 
@@ -33,10 +33,19 @@ def add_user_to_g():
 
 #####***** Home route *****#####
 
-@app.route('/')
+@app.route('/', methods=["GET", "POST"])
 def home():
-    product = Product.query.all()
-    return render_template('home.html', products=product)
+    '''Home with add to cart post method. Saves product in session when added to cart'''
+    products = Product.query.all()
+    form = ProductForm()
+    if "product_id" not in session:
+        flash('Your shopping cart is empty.')
+        return render_template(url_for('view_cart'))
+    if form.validate_on_submit():
+        for product in products:
+            session["product"] = product.id
+            return redirect(url_for('view_cart'))
+    return render_template('home.html', products=products, form=form)
 
 
 #####***** User sign up/login form *****#####
@@ -113,6 +122,10 @@ def edit_user(id):
         return redirect(url_for('login'))
     return render_template('users/edit-user.html', user=user, form=form)
 
+
+#####***** Shopping Cart *****######
+
 @app.route('/cart')
-def cart():
-    return render_template('cart.html')
+def view_cart():
+    '''Viewing the shopping cart'''
+    return render_template('cart.html', product=session["product"])
