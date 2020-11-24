@@ -42,7 +42,7 @@ hr {
 
 .borders {
 	border: 1px solid rgba(0, 0, 0, 0.158);
-	padding: 20px;
+	padding: 30px;
 	margin-top: 20px;
 }
 .indent {
@@ -79,6 +79,11 @@ hr {
 	box-shadow: 1px 1px 10px rgba(0, 0, 0, 0.479);
 }
 
+.product-title {
+	font-weight: bold;
+	color: rgba(240, 101, 36, 0.849);
+}
+
 .description {
 	color: rgba(255, 255, 255, 0.925);
 }
@@ -97,4 +102,15 @@ hr {
 
 .letter {
 	font-size: 100px;
+}
+
+.qty {
+	margin: 0 0.3em 0.3em 0;
+	border-radius: 70px;
+	color: black;
+	padding: 0 5px 0 8px;
+	background-color: rgba(0, 0, 0, 0.050);
+	text-align: center;
+	white-space: nowrap;
+	box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.479);
 }
