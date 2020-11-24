@@ -1,6 +1,6 @@
 import os
 
-from flask import Flask, render_template, redirect, request, session, flash, url_for, g
+from flask import Flask, render_template, redirect, session, flash, jsonify, url_for, g
 from flask_debugtoolbar import DebugToolbarExtension
 from models import db, connect_db, User, Product, Purchase, Cart
 from forms import SignUpForm, LoginForm, ProductForm
@@ -40,10 +40,10 @@ def home():
     form = ProductForm()
     if "product_id" not in session:
         flash('Your shopping cart is empty.')
-        return render_template(url_for('view_cart'))
+        return render_template('cart.html')
     if form.validate_on_submit():
         for product in products:
-            session["product"] = product.id
+            session["product"] = product.serialize()
             return redirect(url_for('view_cart'))
     return render_template('home.html', products=products, form=form)
 
@@ -128,4 +128,4 @@ def edit_user(id):
 @app.route('/cart')
 def view_cart():
     '''Viewing the shopping cart'''
-    return render_template('cart.html', product=session["product"])
+    return render_template('cart.html', product= session["product"])

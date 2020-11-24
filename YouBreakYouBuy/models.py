@@ -40,8 +40,16 @@ class Product(db.Model):
     id = db.Column(db.Integer, primary_key=True, autoincrement=True) 
     product_name = db.Column(db.Text, unique=True)
     product_img = db.Column(db.String)
-    price = db.Column(db.Integer)
+    price = db.Column(db.Float)
     inventory = db.Column(db.Integer)
+
+    def serialize(self):
+        return {"id": self.id,
+                "product_name": self.product_name,
+                "product_img": self.product_img,
+                "price": self.price,
+                "inventory": self.inventory
+                }           
 
 class Purchase(db.Model):
     '''Users purchases'''

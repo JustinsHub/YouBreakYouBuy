@@ -14,5 +14,4 @@ class LoginForm(FlaskForm):
     password = PasswordField("Password:", validators=[InputRequired()])
 
 class ProductForm(FlaskForm):
-    product_name = StringField('Product Name')
     product = SubmitField('Add to Cart')

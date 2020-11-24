@@ -74,7 +74,7 @@
 <section id="product" class="container mt-5">
     <div class="row"> 
 
-            <div class="col-md-2 mt-5">
+            <div class="col-lg-2 mt-5">
                 <p class="mt-5"><cite>Number one leading brand! <b>-Forbes</b></cite></p>
                 <br>
                 <p><cite>The most innovative idea that is going to change the world by far! <b>-Global News</b></cite></p>
@@ -83,14 +83,14 @@
             </div>
 
 
-            <div class="text-center col-md-8">
+        <div class="text-center col col-md-8">
             <h1>Our Product</h1>
             {% for product in products %}
             <img class="product-img-size" src="{{product.product_img}}">
             {% endfor %}
 
         
-        <div>
+        <div class="mt-3">
             <form class="form-group" method="POST">
                     {{form.hidden_tag()}}
                     <p>Infinite Water</p>
@@ -103,11 +103,11 @@
                     {% endfor %}
                     </p>
             </form>
-            </div>
+        </div>
         
         </div>
 
-            <div class="col-md-2 mt-5">
+            <div class="col-lg-2 mt-5">
                 <p class="mt-5"><cite>The next upcoming product that everyone will have in their household. <br><b>-Some CEO</b></cite></p>
                 <br>
                 <p><cite>Pure genius! <br><b>-I Don't Know</b></cite></p>

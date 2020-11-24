@@ -31,6 +31,20 @@ hr {
 	padding-bottom: 2.5rem;
 }
 
+#login-brand-font {
+	font-size: 33px;
+}
+
+#signup-rules {
+	font-size: 13px;
+	color: rgba(0, 0, 0, 0.4);
+}
+
+.borders {
+	border: 1px solid rgba(0, 0, 0, 0.158);
+	padding: 20px;
+	margin-top: 20px;
+}
 .indent {
 	text-indent: 50px;
 }
@@ -43,17 +57,8 @@ hr {
 	font-weight: bold;
 }
 
-#login-brand-font {
-	font-size: 33px;
-}
-
 .no-account {
 	font-size: 14px;
-}
-
-#signup-rules {
-	font-size: 13px;
-	color: rgba(0, 0, 0, 0.4);
 }
 
 .btns {
@@ -68,7 +73,7 @@ hr {
 }
 
 .product-img-size {
-	height: 80%;
+	height: 75%;
 	width: 90%;
 	border-radius: 20px;
 	box-shadow: 1px 1px 10px rgba(0, 0, 0, 0.479);
