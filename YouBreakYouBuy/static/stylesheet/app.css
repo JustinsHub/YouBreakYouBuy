@@ -2,6 +2,10 @@ html {
 	scroll-behavior: smooth;
 }
 
+body {
+	background-color: rgba(0, 0, 0, 0.030);
+}
+
 .section-color {
 	background-color: rgba(240, 101, 36, 0.849);
 }
@@ -104,6 +108,15 @@ hr {
 	font-size: 100px;
 }
 
+.update-user {
+	font-size: 13px;
+	color: rgba(0, 0, 0, 0.404);
+}
+
+.remove {
+	font-size: 14px;
+	color: rgba(0, 0, 0, 0.404);
+}
 .qty {
 	margin: 0 0.3em 0.3em 0;
 	border-radius: 70px;

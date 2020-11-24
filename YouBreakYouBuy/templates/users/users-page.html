@@ -28,15 +28,15 @@
     </ul>
 {% endblock %}
 
-{% block content %}
+{% block cart %}
 <div class="container">
     <div class="d-flex justify-content-center mt-4">
     <h1>Your Account</h1>
     </div>
-    <div>
-        <p>Name: {{user.first_name}} {{user.last_name}}</p>
-        <p>Username: {{user.username}}</p>
-        <p>Email: {{user.email}}</p>
+    <div class="text-center">
+        <p><b>Name:</b> {{user.first_name}} {{user.last_name}}</p>
+        <p><b>Username:</b> {{user.username}}</p>
+        <p><b>Email:</b> {{user.email}}</p>
     </div>
 </div>
 <div class="d-flex justify-content-center mt-4">

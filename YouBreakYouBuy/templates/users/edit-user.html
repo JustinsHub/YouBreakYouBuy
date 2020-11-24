@@ -2,8 +2,8 @@
 
 {% block title %}Edit Profile{% endblock %}
 
-{% block content %}
-<main class="text-center mt-5">
+{% block cart %}
+<main class="text-center mt-4">
 <div class="container card border-card" style="width: 21.9rem; height: 20rem;">
 <div class="card-body">
     <h1>Update Your Profile</h1>
@@ -42,8 +42,11 @@
         <button class="btn btns mb-3" type="submit">Update</button>
     </div>
     </p>
-    
     </form>
-
+    <div>
+        <p class="update-user">
+        Don't want to update? Go back to <a class="login-here" href="{{url_for('user_page')}}">Account</a>.
+        </p>
+    </div>
 </main>
 {% endblock %}

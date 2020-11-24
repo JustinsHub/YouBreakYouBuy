@@ -128,4 +128,15 @@ def edit_user(id):
 @app.route('/cart')
 def view_cart():
     '''Viewing the shopping cart'''
-    return render_template('cart.html', product= session["product"])
+    if "product" in session:
+        return render_template('cart.html', product= session["product"])
+    return render_template('cart.html')
+
+@app.route('/remove_cart_item')
+def remove_item():
+    '''Deleted current product saved in session'''
+    if "product" in session:
+        del session["product"]
+        return redirect(url_for('view_cart'))
+
+######***** Checkout *****######
