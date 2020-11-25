@@ -1,5 +1,5 @@
 {% extends 'base.html' %}
-
+{% block title %}Checkout{% endblock %}
 {% block nav %}
 {% if g.user %}
             <ul class="navbar-nav d-inline col-6">
@@ -27,35 +27,25 @@
 {% endblock %}
 
 {% block cart %}
-{% if not g.user %}
-<main class="text-center mt-5">
-<div class="container card border-card" style="width: 21.9rem; height: 23rem;">
-    <div class="card-body">
-    <p id="login-brand-font" class="brand-font mt-3">YouBreakYouBuy</p>
-    <form class="form-signin mt-5" method="POST">
-    {{form.hidden_tag()}}
-    <p>
-    {{form.username(class="form-control", placeholder="Username")}}
-    </p>
-    <p>
-    {{form.password(class="form-control", placeholder="Password")}}
-    </p>
+<section class="container text-center">
+    <div>
+        <p>Is this your order?</p>
+    </div>
+    
+<div>
+    <form method="POST">
+        {{form.hidden_tag()}}
+        {% for field in form if field.widget.input_type != 'hidden' %}
+        <p>
+        {{field(class="btn btns")}}
 
-    {% for field in form if field.widget.input_type != 'hidden' %}
-    {% for error in field.errors %}
+        {% for error in field.errors %}
         {{ error }}
-    {% endfor %}
-    {% endfor %}
-    </p>
-    <p class="no-account">Don't have an account?<a class="login-here" href="{{url_for('signup')}}"> Sign up</a></p>
-    <button class="btn btns" type="submit">Login</button>
+        {% endfor %}
+        {% endfor %}
+        </p>
+    <p class="update-user">By placing your order, you are agree to YouBreakYouBuy's <a href="{{url_for('refund_policy')}}" class="login-here">refund policy</a>.</p>
     </form>
-    </div> 
 </div>
-{% else %}
-<div class="container d-flex justify-content-center mt-3">
-    <h2>You thought you were gonna have it your way?</h2>
-</div>
-{% endif %}
-</main>
+</section>
 {% endblock %}

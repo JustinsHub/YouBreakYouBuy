@@ -15,3 +15,6 @@ class LoginForm(FlaskForm):
 
 class ProductForm(FlaskForm):
     product = SubmitField('Add to Cart')
+
+class PurchaseForm(FlaskForm):
+    purchase = SubmitField('Place your order')

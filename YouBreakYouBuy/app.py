@@ -2,8 +2,8 @@ import os
 
 from flask import Flask, render_template, redirect, session, flash, jsonify, url_for, g
 from flask_debugtoolbar import DebugToolbarExtension
-from models import db, connect_db, User, Product, Purchase, Cart
-from forms import SignUpForm, LoginForm, ProductForm
+from models import db, connect_db, User, Product, Purchase
+from forms import SignUpForm, LoginForm, ProductForm, PurchaseForm
 from functions import user_login, user_logout, CURRENT_USER
 from secrets import backup_default
 
@@ -129,8 +129,8 @@ def edit_user(id):
 def view_cart():
     '''Viewing the shopping cart'''
     if "product" in session:
-        return render_template('cart.html', product= session["product"])
-    return render_template('cart.html')
+        return render_template('cart/cart.html', product= session["product"])
+    return render_template('cart/cart.html')
 
 @app.route('/remove_cart_item')
 def remove_item():
@@ -140,3 +140,14 @@ def remove_item():
         return redirect(url_for('view_cart'))
 
 ######***** Checkout *****######
+
+@app.route('/checkout', methods=["GET", "POST"])
+def checkout():
+    '''Check out the product to be able to purchase'''
+    form = PurchaseForm()
+    return render_template('cart/checkout.html', form=form) #database purchases commit / get and post ids?
+
+@app.route('/refund')
+def refund_policy():
+    '''Refund template page'''
+    return render_template('cart/refund.html')
