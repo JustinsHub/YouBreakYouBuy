@@ -145,21 +145,22 @@ def remove_item():
 def checkout():
     '''Check out the product to be able to purchase by getting the product from session 
         and passing it to purchase model.'''
+
     if "product" not in session:
-        flash('Can\'t check out if there is nothing is your cart.')
+        flash('Can not proceed to checkout if there is nothing is your cart.')
         return redirect(url_for('view_cart'))
     form = PurchaseForm()
     product = session["product"]
-
-    if form.validate_on_submit():
-        purchase = Purchase(product_id = product.get("id"),
-                            user_id = g.user.id,
-                            inventory_count = product.get("inventory") 
-                            )
-        db.session.add(purchase)
-        db.session.commit()
-        flash('Your purchase is complete!')
-        return redirect(url_for('remove_item'))
+    if g.user in session:
+        if form.validate_on_submit():
+            purchase = Purchase(product_id = product.get("id"),
+                                user_id = g.user.id,
+                                inventory_count = product.get("inventory") 
+                                )
+            db.session.add(purchase)
+            db.session.commit()
+            flash('Your purchase is complete!')
+            return redirect(url_for('remove_item'))
     return render_template('cart/checkout.html', form=form)
 
 @app.route('/refund')

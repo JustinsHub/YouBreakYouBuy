@@ -29,9 +29,10 @@
 {% block cart %}
 <section class="container text-center">
     <div>
-        <p>Is this your order?</p>
+        <p>Order Summary</p>
     </div>
 <div>
+    {% if g.user in session %}
     <form method="POST">
         {{form.hidden_tag()}}
         {% for field in form if field.widget.input_type != 'hidden' %}
@@ -43,9 +44,15 @@
         {% endfor %}
         {% endfor %}
         </p>
-
+    
     <p class="update-user">By placing your order, you are agree to YouBreakYouBuy's <a href="{{url_for('refund_policy')}}" class="login-here">refund policy</a>.</p>
     </form>
+
+    {% else %}
+    <div class="container text-center">
+    <p>You must be logged in, in order to continue with the purchase. <a href="{{url_for('login')}}">Login</a></p>
+    </div>  
+    {% endif %}
 </div>
 </section>
 {% endblock %}
