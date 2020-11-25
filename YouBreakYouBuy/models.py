@@ -58,8 +58,12 @@ class Purchase(db.Model):
     product_id = db.Column(db.Integer, db.ForeignKey('products.id'))
     user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
     date_and_time = db.Column(db.DateTime, default=datetime.utcnow())
+    inventory_count = db.Column(db.Integer)
+
+    inventory = db.relationship('Product', backref='purchases')
 
 def connect_db(app):
     '''Connects database with the app'''
     db.app = app
     db.init_app(app)
+    
