@@ -29,18 +29,28 @@
 {% block cart %}
 <section class="container text-center">
     <div>
-        <p>Order Summary</p>
+        <p class="order-summary">Order Summary</p>
+    </div>
+    <div class="d-flex justify-content-center">
+        <div class="card p-5" style="width: 21rem; height: 10rem;">
+            {{product.product_name}}
+        
+            <span class="order mt-2">
+                <hr class="hr-2">
+                Order total: <span class="ml-1">${{product.price}}</span>
+            </span>
+        </div>
     </div>
 <div>
-    {% if g.user in session %}
+    {% if g.user %}
     <form method="POST">
         {{form.hidden_tag()}}
         {% for field in form if field.widget.input_type != 'hidden' %}
         <p>
         {{field(class="btn btns")}}
-
         {% for error in field.errors %}
-        {{ error }}
+    
+        <p>{{ error }}</p>
         {% endfor %}
         {% endfor %}
         </p>
@@ -49,10 +59,13 @@
     </form>
 
     {% else %}
-    <div class="container text-center">
-    <p>You must be logged in, in order to continue with the purchase. <a href="{{url_for('login')}}">Login</a></p>
+
+    <div class="container text-center mt-3">
+    <p class="update-user">Please <a class="login-here" href="{{url_for('login')}}">login</a> in order to continue with your purchase. </p>
     </div>  
+
     {% endif %}
+
 </div>
 </section>
 {% endblock %}

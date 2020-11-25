@@ -14,6 +14,10 @@ hr {
 	width: 20%;
 }
 
+.hr-2 {
+	width: 100%;
+}
+
 .navbar {
 	background-color: rgba(240, 101, 36, 0.849);
 }
@@ -112,11 +116,22 @@ hr {
 	font-size: 13px;
 	color: rgba(0, 0, 0, 0.404);
 }
+.order {
+	font-size: 18px;
+	font-weight: bold;
+	color: rgb(179, 7, 7);
+}
+
+.order-summary {
+	font-size: 18px;
+	font-weight: bold;
+}
 
 .remove {
 	font-size: 14px;
 	color: rgba(0, 0, 0, 0.404);
 }
+
 .qty {
 	margin: 0 0.3em 0.3em 0;
 	border-radius: 70px;

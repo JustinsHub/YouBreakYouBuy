@@ -151,7 +151,7 @@ def checkout():
         return redirect(url_for('view_cart'))
     form = PurchaseForm()
     product = session["product"]
-    if g.user in session:
+    if g.user:
         if form.validate_on_submit():
             purchase = Purchase(product_id = product.get("id"),
                                 user_id = g.user.id,
@@ -161,7 +161,7 @@ def checkout():
             db.session.commit()
             flash('Your purchase is complete!')
             return redirect(url_for('remove_item'))
-    return render_template('cart/checkout.html', form=form)
+    return render_template('cart/checkout.html', form=form, product=product)
 
 @app.route('/refund')
 def refund_policy():
