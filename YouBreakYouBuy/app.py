@@ -2,7 +2,7 @@ import os
 
 from flask import Flask, render_template, redirect, session, flash, jsonify, url_for, g
 from flask_debugtoolbar import DebugToolbarExtension
-from models import db, connect_db, User, Product, Purchase
+from models import db, connect_db, User, Product, Purchase, Contact
 from forms import SignUpForm, LoginForm, ProductForm, PurchaseForm, ContactForm
 from functions import user_login, user_logout, CURRENT_USER
 from secrets import backup_default
@@ -124,9 +124,18 @@ def edit_user(id):
 
 
 #####***** User Contact Us *****######
-@app.route('/contact')
+@app.route('/contact', methods=["GET","POST"])
 def contact_us():
     form = ContactForm()
+    if form.validate_on_submit():
+        user_message = Contact(name=form.name.data,
+                                email=form.email.data,
+                                message=form.message.data
+                                )
+        db.session.add(user_message)
+        db.session.commit()
+        flash('Thank you! Your message has been received! We will contact you as soon as possible!', 'success')
+        return redirect(url_for('contact_us'))
     return render_template('contact.html', form=form)
 
 #####***** Shopping Cart *****######
