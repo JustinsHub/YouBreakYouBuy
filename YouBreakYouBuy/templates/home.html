@@ -4,7 +4,7 @@
 {% block nav %}
 <ul class="navbar-text d-inline col-6">
     <li class="navbar-text">
-        <a class="nav-link" href="{{url_for('view_cart')}}"><i class="fas fa-shopping-cart"></i></a>
+        <a class="nav-link" href="{{url_for('view_cart')}}"><i class="fas fa-shopping-cart" style: ></i></a>
     </li>
     <li class="navbar-text">
         <a class="nav-link" href="#about">About</a>
@@ -35,6 +35,7 @@
     {% endif %}
 </ul>
 {% endblock %}
+
 {% block content %}
 <main>
 <section id="about" class="container">
@@ -87,7 +88,7 @@
 
 
         <div class="text-center col col-md-8">
-            <h1>Our Product</h1>
+            <h1 class="global-font">Our Product</h1>
             {% for product in products %}
             <img class="product-img-size" src="{{product.product_img}}">
             {% endfor %}
@@ -119,4 +120,35 @@
     </div>
 </section>
 
+{% endblock %}
+
+
+{% block clients %} 
+<section style="background-color:  rgba(240, 101, 36, 0.432);;">
+    <div class="container">
+        <div>
+            <h1 class="text-center pt-5 global-font">Our Trusted Clients</h1>
+            <div class="m-5 text-center">
+                <div class="mt-5">
+                    <img class="col-md-3 ml-5" src="https://logos-world.net/wp-content/uploads/2020/09/SpaceX-Logo.png">
+                    <img class="col-md-3 mt-3" src="https://media.corporate-ir.net/media_files/IROL/17/176060/Oct18/Amazon%20logo.PNG">
+                    <img class="col-md-3" src="https://lh3.googleusercontent.com/proxy/V8BSUjqKXeakQvqFTPJZZfCqdfNOfBAtwAGnPtaSx3mPuLTXvXLFXySDzfZnlmYw430sBip1S4haUUxNkTeeyADPkZycJiBCzHEWQWCTThCY-DKcFNtfyCgOr-DVG3NUkZ9uon-kf7P9WAZGiG95r874">
+                    <img class="col-md-2" src="https://assets.stickpng.com/images/580b57fcd9996e24bc43c529.png">
+                </div>
+                <div>
+                    <img class="col-md-2 ml-5" src="https://purepng.com/public/uploads/large/purepng.com-berkshire-hathaway-logologobrand-logoiconslogos-251519939038h7gnv.png">
+                    <img class="col-md-4" src="https://cvshealth.com/sites/default/files/cvs-pharmacy-logo.png">
+                    <img class="col-md-2" src="https://www.freepnglogos.com/uploads/mcdonalds-png-logo/mcdonalds-png-logo-picture-3.png">
+                    <img class="col-md-3" src="https://www.freepnglogos.com/uploads/costco-png-logo/empowering-marginalized-youth-in-the-outdoors-costco-png-logo-6.png">
+                </div>
+                <div>
+                    <img class="col-md-2 ml-5" src="https://assets.stickpng.com/images/5842f0a9a6515b1e0ad75b18.png">
+                    <img class="col-md-3" src="https://download.logo.wine/logo/Coca-Cola/Coca-Cola-Logo.wine.png">
+                    <img class="col-md-3" src="https://www.basistechnologies.com/wp-content/uploads/2019/06/water-corporation-customer-logo_988x742.png">
+                    <img class="col-md-3" src="https://images.vexels.com/media/users/3/144838/isolated/preview/0e8ecc882dcf98521ef01d2163416fc9-bitcoin-logo-by-vexels.png">
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
 {% endblock %}

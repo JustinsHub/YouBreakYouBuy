@@ -62,6 +62,13 @@ class Purchase(db.Model):
 
     inventory = db.relationship('Product', backref='purchases')
 
+class Contact(db.Model):
+    '''Contact Us information (different information from User class)'''
+    id = db.Column(db.Integer, primary_key=True, autoincrement=True)
+    name = db.Column(db.Text, nullable=False)
+    email = db.Column(db.String, nullable=False)
+    message = db.Column(db.Text, nullable=False)
+
 def connect_db(app):
     '''Connects database with the app'''
     db.app = app

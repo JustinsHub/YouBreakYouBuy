@@ -80,6 +80,10 @@ hr {
 	border: black;
 }
 
+.global-font {
+	font-family: Georgia, 'Times New Roman', Times, serif;
+}
+
 .product-img-size {
 	height: 75%;
 	width: 90%;

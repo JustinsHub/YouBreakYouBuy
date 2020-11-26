@@ -1,5 +1,5 @@
 from flask_wtf import FlaskForm
-from wtforms import StringField, PasswordField, SubmitField
+from wtforms import StringField, PasswordField, SubmitField, TextAreaField
 from wtforms.validators import InputRequired, Email, Length
 
 class SignUpForm(FlaskForm):
@@ -18,3 +18,8 @@ class ProductForm(FlaskForm):
 
 class PurchaseForm(FlaskForm):
     purchase = SubmitField('Place your order')
+
+class ContactForm(FlaskForm):
+    name = StringField('Name:', validators=[InputRequired()])
+    email = StringField('Email:', validators=[InputRequired(), Email()])
+    message = TextAreaField('Message', validators=[InputRequired()])

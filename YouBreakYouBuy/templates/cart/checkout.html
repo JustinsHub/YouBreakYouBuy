@@ -26,7 +26,7 @@
                 </ul>
 {% endblock %}
 
-{% block cart %}
+{% block clients %}
 <section class="container text-center">
     <div>
         <p class="order-summary">Order Summary</p>
@@ -43,6 +43,8 @@
     </div>
 <div>
     {% if g.user %}
+    <div class="container d-flex justify-content-center mt-1">
+    <div class="card d-flex pt-3" style="width: 21rem;">
     <form method="POST">
         {{form.hidden_tag()}}
         {% for field in form if field.widget.input_type != 'hidden' %}
@@ -54,10 +56,10 @@
         {% endfor %}
         {% endfor %}
         </p>
-    
-    <p class="update-user">By placing your order, you are agree to YouBreakYouBuy's <a href="{{url_for('refund_policy')}}" class="login-here">refund policy</a>.</p>
+    </div>
+    </div>
+    <p class="update-user mt-2">By placing your order, you are agree to YouBreakYouBuy's <a href="{{url_for('refund_policy')}}" class="login-here">refund policy</a>.</p>
     </form>
-
     {% else %}
 
     <div class="container text-center mt-3">

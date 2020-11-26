@@ -3,7 +3,7 @@ import os
 from flask import Flask, render_template, redirect, session, flash, jsonify, url_for, g
 from flask_debugtoolbar import DebugToolbarExtension
 from models import db, connect_db, User, Product, Purchase
-from forms import SignUpForm, LoginForm, ProductForm, PurchaseForm
+from forms import SignUpForm, LoginForm, ProductForm, PurchaseForm, ContactForm
 from functions import user_login, user_logout, CURRENT_USER
 from secrets import backup_default
 
@@ -122,6 +122,12 @@ def edit_user(id):
         return redirect(url_for('login'))
     return render_template('users/edit-user.html', user=user, form=form)
 
+
+#####***** User Contact Us *****######
+@app.route('/contact')
+def contact_us():
+    form = ContactForm()
+    return render_template('contact.html', form=form)
 
 #####***** Shopping Cart *****######
 

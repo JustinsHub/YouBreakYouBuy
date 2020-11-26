@@ -1,0 +1,31 @@
+
+{% extends 'base.html' %}
+
+{% block nav %}{% endblock %}
+
+{% block product %}
+<section class="container">
+    <div class="text-center">
+        <form class="form-group" method="POST">
+            {{form.hidden_tag()}}
+            <h1><b>Contact Us</b></h1>
+            <div>
+            {{form.name(placeholder="Name")}}
+            </div>
+            <div>
+            {{form.email(placeholder="Email")}}
+            </div>
+            <div>
+            {{form.message(placeholder="Message")}}
+            </div>
+            {% for field in form if field.widget.input_type != 'hidden' %}
+            {% for error in field.errors %}
+                {{ error }}
+            {% endfor %}
+            {% endfor %}
+            <button class="btn btns" type="submit">Submit</button>
+            
+    </form>
+    </div>
+</section>
+{% endblock %}
