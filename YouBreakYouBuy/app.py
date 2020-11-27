@@ -124,6 +124,7 @@ def edit_user(id):
 
 
 #####***** User Contact Us *****######
+
 @app.route('/contact', methods=["GET","POST"])
 def contact_us():
     form = ContactForm()

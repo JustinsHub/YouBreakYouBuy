@@ -4,27 +4,28 @@
 {% block nav %}{% endblock %}
 
 {% block product %}
-<section class="container">
-    <div class="text-center">
+<section class="text-center">
+    <div class="container card border-card mt-5" style="width: 25.9rem;">
         <form class="form-group" method="POST">
             {{form.hidden_tag()}}
-            <h1><b>Contact Us</b></h1>
-            <div>
-            {{form.name(placeholder="Name")}}
+            <h1 class="mt-4"><b>Contact Us</b></h1>
+            <p class="update-user">Send us a message! We would love to hear from you.</p>
+            <div class="mt-3">
+            {{form.name(class="input-radius", placeholder="Name")}}
             </div>
-            <div>
-            {{form.email(placeholder="Email")}}
+            <div class="mt-3">
+            {{form.email(class="input-radius", placeholder="Email")}}
             </div>
-            <div>
-            {{form.message(placeholder="Message")}}
+            <div class="mt-3">
+            {{form.message(class="input-radius", placeholder="Message", cols="40", rows="5")}}
             </div>
-            {% for field in form if field.widget.input_type != 'hidden' %}
-            {% for error in field.errors %}
-                {{ error }}
-            {% endfor %}
-            {% endfor %}
-            <button class="btn btns" type="submit">Submit</button>
-            
+            <p>{% for field in form if field.widget.input_type != 'hidden' %}
+                {% for error in field.errors %}
+                    {{ error }}
+                {% endfor %}
+                {% endfor %}
+                </p>
+            <button class="btn btns mt-3" type="submit">Submit</button>
     </form>
     </div>
 </section>

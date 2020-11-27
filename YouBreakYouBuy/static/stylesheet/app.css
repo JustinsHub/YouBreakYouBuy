@@ -146,3 +146,13 @@ hr {
 	white-space: nowrap;
 	box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.479);
 }
+
+.star {
+	color: red;
+}
+
+.input-radius {
+	border-radius: 6px 6px;
+	background-color: rgba(128, 128, 128, 0.164);
+	border: 0;
+}
