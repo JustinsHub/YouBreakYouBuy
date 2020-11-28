@@ -160,7 +160,7 @@ def remove_item():
 @app.route('/checkout', methods=["GET", "POST"])
 def checkout():
     '''Check out the product to be able to purchase by getting the product from session 
-        and passing it to purchase model.'''
+        and integrate it to purchase model.'''
 
     if "product" not in session:
         flash('Can not proceed to checkout if there is nothing is your cart.')
