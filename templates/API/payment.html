@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+    {% block title %}Payment{% endblock %}
+<style type="text/css" media="screen">
+    form article label {
+    display: block;
+    margin: 5px;
+    }
+
+    form .submit {
+    margin: 15px 0;
+    }
+</style>
+{% block product %}
+    {% if g.user %}
+    <section>
+    <div>
+        <form action="/charge" method="POST">
+            <article>
+            <label>
+                <span>Amount is $49.99</span>
+            </label>
+            </article>
+        
+            <script src="https://checkout.stripe.com/checkout.js" class="stripe-button"
+                    data-key="{{ key }}"
+                    data-description="Infinite Water"
+                    data-amount="4999"
+                    data-locale="auto"></script>
+        </form>
+    </div>
+    </section>
+    {% else %}
+    {% if not g.user %}
+    <div>
+        <h1>You need to login in order to continue.</h1>
+    </div>
+    {% elif "product" not in session %}
+    <div>
+        <h1>You something in your cart in order to continue.</h1>
+    </div>
+    {% endif %}
+    {% endif %}
+
+{% endblock %}

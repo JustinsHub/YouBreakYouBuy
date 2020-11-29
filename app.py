@@ -1,11 +1,12 @@
 import os
+import stripe
 
-from flask import Flask, render_template, redirect, session, flash, jsonify, url_for, g
+from flask import Flask, render_template, redirect,request, session, flash, jsonify, url_for, g
 from flask_debugtoolbar import DebugToolbarExtension
 from models import db, connect_db, User, Product, Purchase, Contact
-from forms import SignUpForm, LoginForm, ProductForm, PurchaseForm, ContactForm
-from functions import user_login, user_logout, CURRENT_USER
-from secrets import backup_default
+from forms import SignUpForm, LoginForm, ProductForm, ContactForm
+from functions import user_login, user_logout, remove_cart, CURRENT_USER
+from secrets import backup_default, publishable_key, api_key
 
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = (
@@ -15,6 +16,13 @@ app.config['SQLALCHEMY_ECHO'] = False
 app.config['DEBUG_TB_INTERCEPT_REDIRECTS'] = False
 app.config['SECRET_KEY'] = os.environ.get('SECRET_KEY', backup_default)
 toolbar = DebugToolbarExtension(app)
+
+stripe_keys = {
+'secret_key': os.environ.get('SECRET_KEY', api_key),
+'publishable_key': os.environ.get('PUBLISHABLE_KEY', publishable_key)
+}
+
+stripe.api_key = stripe_keys['secret_key']
 
 connect_db(app)
 
@@ -155,31 +163,48 @@ def remove_item():
         del session["product"]
         return redirect(url_for('view_cart'))
 
-######***** Checkout *****######
+@app.route('/refund')
+def refund_policy():
+    '''Refund template page'''
+    return render_template('cart/refund.html')
 
-@app.route('/checkout', methods=["GET", "POST"])
-def checkout():
-    '''Check out the product to be able to purchase by getting the product from session 
+#####***** Stripe API Payment *****#####
+
+@app.route('/payment')
+def payment():
+    '''Show Stripe payment method'''
+    return render_template('API/payment.html', key=stripe_keys['publishable_key'])
+
+@app.route('/charge', methods=["POST"])
+def charge_user():
+    '''Charging the user with Stripe's methods. Check out the product to be able to purchase by getting the product from session 
         and integrate it to purchase model.'''
 
     if "product" not in session:
         flash('Can not proceed to checkout if there is nothing is your cart.')
         return redirect(url_for('view_cart'))
-    form = PurchaseForm()
     product = session["product"]
-    if g.user:
-        if form.validate_on_submit():
+    # Amount in cents
+    amount = 4999
+    if g.user: 
+        if request.method == "POST":
+            customer = stripe.Customer.create(
+                email=g.user.email,
+                source=request.form['stripeToken']
+            )
+
+            charge = stripe.Charge.create(
+                customer=customer.id,
+                amount=amount,
+                currency='usd',
+                description='Infinite Water Charge'
+            )
+
             purchase = Purchase(product_id = product.get("id"),
                                 user_id = g.user.id,
                                 inventory_count = product.get("inventory") 
                                 )
             db.session.add(purchase)
             db.session.commit()
-            flash('Your purchase is complete!')
-            return redirect(url_for('remove_item'))
-    return render_template('cart/checkout.html', form=form, product=product)
-
-@app.route('/refund')
-def refund_policy():
-    '''Refund template page'''
-    return render_template('cart/refund.html')
+            remove_cart() #Removes cart items once purchased.
+    return render_template('API/charge.html', amount=amount)

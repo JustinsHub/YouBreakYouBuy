@@ -16,9 +16,6 @@ class LoginForm(FlaskForm):
 class ProductForm(FlaskForm):
     product = SubmitField('Add to Cart')
 
-class PurchaseForm(FlaskForm):
-    purchase = SubmitField('Place your order')
-
 class ContactForm(FlaskForm):
     name = StringField('Name:', validators=[InputRequired()])
     email = StringField('Email:', validators=[InputRequired(), Email()])
