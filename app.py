@@ -173,7 +173,8 @@ def refund_policy():
 @app.route('/payment')
 def payment():
     '''Show Stripe payment method'''
-    return render_template('API/payment.html', key=stripe_keys['publishable_key'])
+    product = session["product"]
+    return render_template('API/payment.html', key=stripe_keys['publishable_key'], product=product)
 
 @app.route('/charge', methods=["POST"])
 def charge_user():

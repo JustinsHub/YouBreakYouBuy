@@ -11,34 +11,48 @@
     }
 </style>
 {% block product %}
-    {% if g.user %}
-    <section>
+    {% if g.user and "product" in session  %}
+    <section class="text-center container mt-5">
     <div>
-        <form action="/charge" method="POST">
-            <article>
-            <label>
-                <span>Amount is $49.99</span>
-            </label>
-            </article>
         
-            <script src="https://checkout.stripe.com/checkout.js" class="stripe-button"
+        <form action="/charge" method="POST">
+            <div>
+                <p class="order-summary">Order Summary</p>
+            </div>
+            <div class="d-flex justify-content-center">
+                <div class="card p-5 mb-3" style="width: 21rem; height: 10rem;">
+                    {{product.product_name}}
+                
+                    <span class="order mt-2">
+                        <hr class="hr-2">
+                        Order total: 
+                        <span class="ml-1">
+                        <label>
+                        <span>${{product.price}}</span>
+                        </label>
+                        </span>
+                    </span>
+                </div>
+            </div>
+        
+            <script src="https://checkout.stripe.com/checkout.js" class="stripe-button "
                     data-key="{{ key }}"
                     data-description="Infinite Water"
                     data-amount="4999"
                     data-locale="auto"></script>
+            <p class="update-user mt-2">By placing your order, you are agree to YouBreakYouBuy's <a href="{{url_for('refund_policy')}}" class="login-here">refund policy</a>.</p>
         </form>
     </div>
     </section>
     {% else %}
     {% if not g.user %}
-    <div>
-        <h1>You need to login in order to continue.</h1>
+    <div class="text-center container">
+        <h1 class="mt-5">You need to <a href="{{url_for('login')}}" class="login-here">login</a> in order to continue.</h1>
     </div>
     {% elif "product" not in session %}
-    <div>
-        <h1>You something in your cart in order to continue.</h1>
+    <div class="text-center container">
+        <h1 class="mt-5">You something in your <a href="{{url_for('view_cart')}}" class="login-here">cart</a> in order to continue.</h1>
     </div>
     {% endif %}
     {% endif %}
-
 {% endblock %}
