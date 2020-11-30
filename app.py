@@ -182,7 +182,7 @@ def charge_user():
         and integrate it to purchase model.'''
 
     if "product" not in session:
-        flash('Can not proceed to checkout if there is nothing is your cart.')
+        flash('Can not proceed to checkout if there is nothing in your cart.')
         return redirect(url_for('view_cart'))
     product = session["product"]
     # Amount in cents
