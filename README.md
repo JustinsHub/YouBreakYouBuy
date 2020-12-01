@@ -1,4 +1,4 @@
-# Capstoneproject (YBYB)
+# https://youbreakyoubuy.herokuapp.com/
 Capstone 1 Proposal (Mini-Ecommerce)
 Goal: Build a database-driven website from an API of my choice
 
