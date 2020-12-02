@@ -30,6 +30,7 @@ Database Models
 - product_id (ForeignKey required)
 - user_id (ForeignKey required)
 - purchase date/time
+- current_inventory
 
 # API
   - Stripe `for payment`
